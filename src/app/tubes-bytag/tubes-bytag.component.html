@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <h1>Tag: {{tagName}}</h1>
+      <div class="row mt-4">
+        <div class="col-md-4" *ngFor="let tube of tubes">
+          <a routerLink="/tubes/details/{{tube.id}}"><h4>{{tube.title}}</h4></a>
+          <img class="img-thumbnail" src="http://img.youtube.com/vi/{{tube.youtubeId}}/0.jpg"/>
+          <p>Publisher: {{tube.publisher}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

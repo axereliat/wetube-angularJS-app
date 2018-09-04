@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 mt-3">
+      <h1 class="text-center">Edit Tube</h1>
+      <form #createForm="ngForm" (submit)="onSubmit()">
+        <div class="form-group">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Title..."
+                   [(ngModel)]="model.title" required #title="ngModel">
+          </div>
+          <div class="alert alert-danger" [hidden]="title.valid || title.pristine">
+            Title field is required!
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description (optional)</label>
+          <textarea class="form-control" name="description" id="description" [(ngModel)]="model.description" rows="4"
+                    #description="ngModel" maxlength="700" placeholder="Description..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="link">Youtube link</label>
+          <input type="text" class="form-control" id="link" name="link" placeholder="Youtube link..."
+                 [(ngModel)]="model.link" required #link="ngModel" ng-pattern="^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$">
+        </div>
+        <div *ngIf="link.valid" class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item"
+                  [src]="getSafeUrl(getIframe(link.value))"
+                  allowfullscreen></iframe>
+        </div>
+        <div class="alert alert-danger" [hidden]="link.valid || link.pristine">
+          Youtube link field is required!
+        </div>
+        <div class="form-group">
+          <label for="categoryId">Category</label>
+          <select class="form-control" id="categoryId" name="categoryId" [(ngModel)]="model.categoryId">
+            <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+          </select>
+          <label for="tagStr">Tags</label>
+          <input type="text" class="form-control" id="tagStr" name="tagStr" placeholder="tag1, tag2, tag3,..."
+                 [(ngModel)]="model.tagStr" required #tagStr="ngModel">
+        </div>
+        <div class="alert alert-danger" [hidden]="tagStr.valid || tagStr.pristine">
+          Tags field is required!
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!createForm.form.valid">Edit</button><br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <h1>Create Category</h1>
+      <form #createForm="ngForm" (submit)="onSubmit()">
+        <div>
+          <label for="name" class="form-control-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name..."
+                 [(ngModel)]="model.name" required #name="ngModel"/>
+          <div class="alert alert-danger" [hidden]="name.valid || name.pristine">
+            Name field is required!
+          </div>
+        </div>
+        <br/>
+        <a routerLink="/categories" class="btn btn-secondary">Back</a>
+        <input type="submit" value="Create" class="btn btn-primary" [disabled]="createForm.invalid"/>
+      </form>
+    </div>
+  </div>
+</div>
